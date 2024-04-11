@@ -11,13 +11,17 @@ import fs from "fs";
 import { camelCase } from "lodash";
 import path from "path";
 import { VP, VP_DIR_PATH, ethrProvider } from "../../config";
+import { VidosResolver, mergeResolvers } from "vidos-did-resolver";
 
 const didEthr = new EthrDIDMethod(ethrProvider);
 const jwtService = new JWTService();
 
+const vidosResolver = new VidosResolver("instance-url", "api-key");
+
 const verificationWithRevocationStatus = async () => {
   // Instantiating the didResolver
-  const didResolver = getSupportedResolvers([didEthr]);
+  const individualResolver = getSupportedResolvers([didEthr]);
+  const didResolver = mergeResolvers([vidosResolver, individualResolver], {failStrategy: "continue"});
 
   if (VP) {
     try {

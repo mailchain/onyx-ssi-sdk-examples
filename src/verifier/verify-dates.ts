@@ -12,14 +12,19 @@ import fs from "fs";
 import { camelCase } from "lodash";
 import path from "path";
 import { JwtPayload, VP, VP_DIR_PATH, ethrProvider } from "../../config";
+import { VidosResolver, mergeResolvers } from "vidos-did-resolver";
+
 
 const didKey = new KeyDIDMethod();
 const didEthr = new EthrDIDMethod(ethrProvider);
 const jwtService = new JWTService();
 
+const vidosResolver = new VidosResolver("instance-url", "api-key");
+
 const verificationWithDates = async () => {
   // Instantiating the didResolver
-  const didResolver = getSupportedResolvers([didKey, didEthr]);
+  const individualResolver = getSupportedResolvers([didKey, didEthr]);
+  const didResolver = mergeResolvers([vidosResolver, individualResolver], {failStrategy: "continue"});
 
   if (VP) {
     try {
