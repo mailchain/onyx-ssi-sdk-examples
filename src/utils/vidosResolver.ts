@@ -7,9 +7,10 @@ import type {
 /** 
  * Create resolver that is using the Vidos service to resolve DIDs. 
  * 
- * - For more info: [https://vidos.id/](https://vidos.id/).
- * - For resolver configuration: [https://dashboard.vidos.id/](https://dashboard.vidos.id/).
- * - For docs: [https://vidos.id/docs/](https://vidos.id/docs/).
+ * - More info: [https://vidos.id/](https://vidos.id/).
+ * - Vidos Dashboard: [https://dashboard.vidos.id/](https://dashboard.vidos.id/).
+ * - Vidos Docs: [https://vidos.id/docs/](https://vidos.id/docs/).
+ * - Quick Start Guide - Create a resolver instance: [https://vidos.id/docs/services/resolver/guides/create-instance/](https://vidos.id/docs/services/resolver/guides/create-instance/)
  */
 export class VidosResolver implements Resolvable {
     constructor(readonly instanceUrl: string, readonly apiKey: string) {}
